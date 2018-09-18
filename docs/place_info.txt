@@ -1,0 +1,1 @@
+ALTER TABLE `place_info` ADD CONSTRAINT `fk_marker_id` FOREIGN KEY (`marker_id`) REFERENCES `placedetails`.`markers`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;

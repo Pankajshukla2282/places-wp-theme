@@ -1,0 +1,31 @@
+1. search place - 
+2. detail place - 
+3. latest searched places - Done
+4. latest added places
+5. relative places list in place detail page
+6. Search box UI - done
+7. Menu bar UI
+8. Menu conditions
+
+-----------------------
+
+Search
+=====
+1. Type in search box
+	a. It will list (autopopulate) available places
+	b. Listed places should have value as Google Map's placeId
+	c. Listed places should have text as Google Map's place name
+2. Click on any suggested place
+	a. Clicked place name will be populated in searchbox
+	b. Searchbox will be disabled
+	c. PlaceId of clicked place will be stored in hidden input
+2. Click search button
+	a. Selected place will be plotted in search_result map
+	b. Selected place will be center of map
+	c. If show related places is selected 
+	d. Search related places in DB
+	e. Plot all related places in map
+	f. fit bound the map
+	
+	
+	
