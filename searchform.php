@@ -1,6 +1,6 @@
 <form class="small" role="search" name="frmSearch" id="frmSearch" method="post">
 	<div class="input-group row">
-		<input type="hidden" name="action" value="api" />
+		<input type="hidden" name="action" value="search" />
 		<input type="hidden" name="service" value="searchMarkers" />
 		<input type="hidden" name="hidMatchMarkerId" id="hidMatchMarkerId" value="<?php echo @esc_html($hidMatchMarkerId) ?>" />
 		<input type="hidden" name="hidMatchPlaceLink" id="hidMatchPlaceLink" value="<?php echo @esc_html($hidMatchPlaceLink) ?>" />

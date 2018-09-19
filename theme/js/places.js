@@ -67,7 +67,7 @@
 				 $( "#txtPlaceToSearch" ).val( ui.item.name );
 				 return false;
 			 },
-			 select: function( event, ui ) {alert("places.js:70 - "+ui.item.link);
+			 select: function( event, ui ) {
 				 $( "#txtPlaceToSearch" ).val( ui.item.name );
 				 $( "#hidMatchMarkerId" ).val( ui.item.id );
 				 $( "#hidMatchPlaceLink" ).val( ui.item.link );

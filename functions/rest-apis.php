@@ -24,15 +24,39 @@ add_action( 'rest_api_init', function () {
 add_action( 'wp_ajax_api', 'pd_api_bootstrap' );
 add_action( 'wp_ajax_nopriv_api', 'pd_api_bootstrap' );
 
-function ajax_search() {
+function pd_search_main() {
 	// we send ajax request to ajax_url
 	
 	$callback = $_REQUEST['callback'];
 	$term = $_REQUEST['txtPlaceToSearch'];
+
 	
 	// check for term, if doesnt exist die
-die("ajax_search");
+	$results = array();
+	$args = array(
+	   'post_type' => 'places',
+	   'post_status' => 'publish',
+	   'orderby' => 'place_name',
+	   'order'  => 'ASC',
+	   's' => $term
+	);
+
+	$the_query = new WP_Query( $args );
+
+	// The Loop
+	if ( $the_query->have_posts() ) {
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			$id = get_the_ID();
+			$results[$id]['id'] = $id;
+			$results[$id]['name'] = get_the_title();
+			$results[$id]['link'] = get_permalink( $id );
+		}
+	}
 	
+	/* Restore original Post Data */
+	wp_reset_postdata();
+		
 	header("Content-Type: application/json");
 	$outData = json_encode($results);
 
@@ -47,3 +71,5 @@ die("ajax_search");
 	wp_die();
 }
 
+add_action( 'wp_ajax_search', 'pd_search_main' );
+add_action( 'wp_ajax_nopriv_search', 'pd_search_main' );
