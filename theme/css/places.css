@@ -1,6 +1,10 @@
 /* Fix for container within navbar on small viewports, for Firefox and Chrome.
 This may but be necessary when Bootstrap 4 is improved after alpha. */
 
+img{
+	max-width: 100%;
+}
+
 .nav_header {
 	border: 0px solid black;
 	border-bottom-width:2px;
@@ -8,7 +12,11 @@ This may but be necessary when Bootstrap 4 is improved after alpha. */
 }
 .jumbotron {
 	border: 0px solid black;
-	border-bottom-width:1px; 
+	border-bottom-width:1px;
+	padding: 1rem;
+}
+.jumbotron.search_box{
+	padding: 4rem 1rem;
 }
 .body_center{
 	margin: auto;
@@ -20,12 +28,14 @@ This may but be necessary when Bootstrap 4 is improved after alpha. */
 }
 .latest_searches, .place_intro {
 	padding-bottom: 10px;
-	border-bottom: 1px solid black;
+	/* border-bottom: 1px solid black; */
 }
 .latest_searches > div, .latest_added > div, .latest_relatives > div, .place_intro > div{
 	line-height: 4px;
 }
-
+.place_name{
+	border-bottom: 1px solid;
+}
 /*****************************/
 @media (max-width: 575px) {
   .navbar > .container {

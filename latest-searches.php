@@ -8,9 +8,9 @@
           $topSearches = get_option("pd_topsearches",'Mudwari');
 
           $topSearchesArr = array_unique(explode("####", $topSearches));
-          $newArray = array();
+          
           for($i=0;$i<$noOfSearches;$i++){
-			if (empty($topSearchesArr[$i])) break;
+			if (empty($topSearchesArr[$i])) continue;
 			$args = array(
 					'posts_per_page' => 1, 
 					'post_status' => 'publish', 
