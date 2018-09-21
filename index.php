@@ -14,7 +14,7 @@
     </div>
     
     <div class="col-sm-4" id="sidebar" role="navigation">
-       <?php get_sidebar(); ?>
+       <?php get_template_part('loops/sidebar', get_post_format()); ?>
     </div>
     
   </div><!-- /.row -->

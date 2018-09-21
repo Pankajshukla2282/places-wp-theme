@@ -29,34 +29,49 @@ function pd_search_main() {
 	
 	$callback = $_REQUEST['callback'];
 	$term = $_REQUEST['txtPlaceToSearch'];
-
+	$service= $_REQUEST['service'];
 	
 	// check for term, if doesnt exist die
 	$results = array();
-	$args = array(
-	   'post_type' => 'places',
-	   'post_status' => 'publish',
-	   'orderby' => 'place_name',
-	   'order'  => 'ASC',
-	   's' => $term
-	);
-
-	$the_query = new WP_Query( $args );
-
-	// The Loop
-	if ( $the_query->have_posts() ) {
-		while ( $the_query->have_posts() ) {
-			$the_query->the_post();
-			$id = get_the_ID();
-			$results[$id]['id'] = $id;
-			$results[$id]['name'] = get_the_title();
-			$results[$id]['link'] = get_permalink( $id );
-		}
-	}
 	
-	/* Restore original Post Data */
-	wp_reset_postdata();
-		
+	switch($service){
+		case "storeSearch":
+			$topSearches = get_option("pd_topsearches");
+			$topSearchesArr = array_unique(explode("####", $topSearches));
+			
+			for($i=0;$i<4;$i++){
+				if (empty($topSearchesArr[$i])) break;
+				$term .= "####".$topSearchesArr[$i];
+			}
+			
+			update_option( "pd_topsearches", $term, TRUE );
+			break;
+		case "searchMarkers":
+		default:
+			$args = array(
+					'post_type' => 'places',
+					'post_status' => 'publish',
+					'orderby' => 'place_name',
+					'order'  => 'ASC',
+					's' => $term
+			);
+			
+			$the_query = new WP_Query( $args );
+			
+			// The Loop
+			if ( $the_query->have_posts() ) {
+				while ( $the_query->have_posts() ) {
+					$the_query->the_post();
+					$id = get_the_ID();
+					$results[$id]['id'] = $id;
+					$results[$id]['name'] = get_the_title();
+					$results[$id]['link'] = get_permalink( $id );
+				}
+				/* Restore original Post Data */
+				wp_reset_postdata();
+			}
+	}
+			
 	header("Content-Type: application/json");
 	$outData = json_encode($results);
 

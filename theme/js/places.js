@@ -29,7 +29,7 @@
 					field.value = "storeSearch";
 				}
 			});
-			
+			console.debug(fields);
 			Utils.jQAjax( "/wp-admin/admin-ajax.php", fields, "POST", function(data){
 				console.debug(data);
 			});
@@ -57,7 +57,7 @@
 	        }
 	      })
 		 .autocomplete({
-			 minLength: 0,
+			 minLength: 3,
 			 source: function( request, response ) {
 			    Utils.jQAjax( "/wp-admin/admin-ajax.php", $('#frmSearch').serialize(), "GET", function(data){
 			    	response( data );

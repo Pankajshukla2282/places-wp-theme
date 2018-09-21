@@ -27,5 +27,47 @@ Search
 	e. Plot all related places in map
 	f. fit bound the map
 	
+------------
+place meta
+===========
+	1. place_address 	Bengaluru, Karnataka, India
+	2. place_website 	https://maps.google.com/?q=Bengaluru,+Karnataka,+I...
+	3. place_name 	Bengaluru
+	4. place_id 	ChIJbU60yXAWrjsR4E9-UejD3_g
+	5. place_lat 	12.9715987
+	6. place_lng 	77.59456269999998
+	7. place_relation 	home
+
+	a. place_
+	b. place_
 	
-	
+
+-----------------------------
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
+
+<script src="http://www.gmodules.com/ig/ifr?url=http://www.google.com/ig/modules/youtube.xml&up_channel=YourChannelName&synd=open&w=320&h=390&title=&border=%23ffffff%7C3px%2C1px+solid+%23999999&output=js"></script>
+
+-------------
+
+<div id="ytplayer"></div>
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+</script>
