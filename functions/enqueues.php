@@ -67,6 +67,9 @@ function pd_admin_enqueues() {
 	wp_register_style('jquery-ui-css', get_template_directory_uri() . '/theme/jquery-ui-1.12.1.custom/jquery-ui.min.css', false, '4.0.0-beta', null);
 	wp_enqueue_style('jquery-ui-css');
 
+	wp_register_style('pd-css', get_template_directory_uri() . '/theme/css/editor-style.css', false, null);
+	wp_enqueue_style('pd-css');
+	
 	/* Scripts */
 
 	//wp_deregister_script( 'jquery' );

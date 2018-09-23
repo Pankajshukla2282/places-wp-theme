@@ -2,6 +2,7 @@ var Utils = {
 	loadScript: function(url, callback){
 	    var t = document.createElement("SCRIPT");
 	    t.async = true;
+	    t.defer = true;
 	    t.type = 'text/javascript';
 	    t.src = url;
 	    t.onreadystatechange=function(){

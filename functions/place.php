@@ -55,26 +55,36 @@ add_action('edit_form_after_title', function() {
  * Add place custom fields
  */
 function add_place_meta_boxes() {
-	add_meta_box("pd_meta", "Place Details", "add_contact_details_place_meta_box", "places", "advanced", "high");
+	add_meta_box("pd_meta_map", "Map", "add_place_map_meta_box", "places", "advanced", "high");
+	add_meta_box("pd_meta_details", "Information", "add_place_details_meta_box", "places", "advanced", "high");
+	add_meta_box("pd_meta_connectivity", "Connectivity", "add_place_connectivity_meta_box", "places", "advanced", "high");
 }
-function add_contact_details_place_meta_box()
+
+function add_place_map_meta_box()
+{
+	global $post;
+	$custom = get_post_custom( $post->ID );
+	?>
+	<div id="map" class="width99" style="height: 300px; display:inline-block; overflow: hidden;"></div>
+	<?php
+}
+
+function add_place_details_meta_box()
 {
 	global $post;
 	$custom = get_post_custom( $post->ID );
 
 	?>
-	<style>.width47 {width:47%;}.width99 {width:99%;}</style>
-	<div id="map" class="width47" style="height: 300px; display:inline-block; overflow: hidden;"></div>
-	<div class="width47" style="display:inline-block; vertical-align: top; margin-left: 5px; overflow: hidden;">
-		<input type="hidden" id="place_id" name="place_id" value="<?= @$custom["place_id"][0] ?>" />
-		<input type="hidden" id="place_lat" name="place_lat" value="<?= @$custom["place_lat"][0] ?>" />
-		<input type="hidden" id="place_lng" name="place_lng" value="<?= @$custom["place_lng"][0] ?>" />
+	<div class="width99" style="display:inline-block; vertical-align: top; margin-left: 5px; overflow: hidden;">
+		<input type="hidden" id="place_id" name="place_id" value="<?php echo @$custom["place_id"][0] ?>" />
+		<input type="hidden" id="place_lat" name="place_lat" value="<?php echo @$custom["place_lat"][0] ?>" />
+		<input type="hidden" id="place_lng" name="place_lng" value="<?php echo @$custom["place_lng"][0] ?>" />
 		<label class="width99">Name:</label><br />
-		<input type="text" id="place_name" name="place_name" value="<?= @$custom["place_name"][0] ?>" class="width99" />
+		<input type="text" id="place_name" name="place_name" value="<?php echo @$custom["place_name"][0] ?>" class="width99" />
 		<label class="width99">Address:</label><br />
-		<textarea rows="5" id="place_address" name="place_address" class="width99"><?= @$custom["place_address"][0] ?></textarea>
+		<textarea rows="5" id="place_address" name="place_address" class="width99"><?php echo @$custom["place_address"][0] ?></textarea>
 		<label class="width99">Website:</label><br />
-		<input type="text" id="place_website" name="place_website" value="<?= @$custom["place_website"][0] ?>" class="width99" />
+		<input type="text" id="place_website" name="place_website" value="<?php echo @$custom["place_website"][0] ?>" class="width99" />
 		<label class="width99">How you are related to it:</label><br />
 		<select id="place_relation" name="place_relation" class="width99">
 			<option value="home" <?php if(@$custom["place_relation"][0] == "home") echo " selected "?>>Home</option>
@@ -84,6 +94,25 @@ function add_contact_details_place_meta_box()
 	</div>
 	<?php
 }
+
+function add_place_connectivity_meta_box()
+{
+	global $post;
+	$custom = get_post_custom( $post->ID );
+
+	?>
+	<div class="width99" style="display:inline-block; vertical-align: top; margin-left: 5px; overflow: hidden;">
+		<label class="width99">Airways:</label><br />
+		<textarea rows="2" id="place_connectivity_air" name="place_connectivity_air" class="width99"><?php echo @$custom["place_connectivity_air"][0] ?></textarea>
+		<label class="width99">Railways:</label><br />
+		<textarea rows="2" id="place_connectivity_rail" name="place_connectivity_rail" class="width99"><?php echo @$custom["place_connectivity_rail"][0] ?></textarea>
+		<label class="width99">Road:</label><br />
+		<textarea rows="2" id="place_connectivity_road" name="place_connectivity_road" class="width99"><?php echo @$custom["place_connectivity_road"][0] ?></textarea>
+	</div>
+	<?php
+}
+
+
 /**
  * Save custom field data when creating/updating posts
  */
@@ -99,6 +128,10 @@ function save_place_custom_fields(){
     update_post_meta($post->ID, "place_lat", @$_POST["place_lat"]);
     update_post_meta($post->ID, "place_lng", @$_POST["place_lng"]);
     update_post_meta($post->ID, "place_relation", @$_POST["place_relation"]);
+
+    update_post_meta($post->ID, "place_connectivity_air", @$_POST["place_connectivity_air"]);
+    update_post_meta($post->ID, "place_connectivity_rail", @$_POST["place_connectivity_rail"]);
+    update_post_meta($post->ID, "place_connectivity_road", @$_POST["place_connectivity_road"]);
   }
 }
 add_action( 'admin_init', 'add_place_meta_boxes' );

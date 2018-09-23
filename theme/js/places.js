@@ -21,6 +21,12 @@
 		// You can put your own code in here
 		
 		$('#btnSearch').on('click',function(){
+			
+			if(!$( "#hidMatchMarkerId" ).val()){
+				alert($( "#txtPlaceToSearch" ).val() + " is unavailable, please raise request to add this place!");
+				return false;
+			}
+			
 			var fields = $('#frmSearch').serializeArray();
 			$(location).attr('href',$("#hidMatchPlaceLink").attr('value'));
 			
@@ -42,9 +48,8 @@
 
 		function loadMapInPage(){console.log("load init");
 			PDMap.load(null, function(){console.log("load");
-				PDMap.addPlaceForm($("#txtPlaceToSearch")[0], function(resp){console.log("form");
-					console.debug(resp);
-					$('#hidMatchMarkerId').attr('value', resp.placeId);
+				PDMap.getDetailsFromPlaceId($("#currentPlaceId").val(), function(resp){
+					console.debug("place marker setting");
 				});
 			});
 		}
@@ -65,6 +70,8 @@
 			 },
 			 focus: function( event, ui ) {
 				 $( "#txtPlaceToSearch" ).val( ui.item.name );
+				 $( "#hidMatchMarkerId" ).val( ui.item.id );
+				 $( "#hidMatchPlaceLink" ).val( ui.item.link );
 				 return false;
 			 },
 			 select: function( event, ui ) {
@@ -87,5 +94,6 @@
 		};
 		
 		loadMapInPage();
+		
 	});
 })(jQuery);

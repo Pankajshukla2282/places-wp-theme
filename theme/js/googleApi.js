@@ -31,7 +31,8 @@ var PDMap = {
 	  
 	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&signed_in=false&libraries=geometry,places&callback=PDMap.init";
 	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,places&callback=PDMap.init";
-	  apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q&libraries=geometry,places&callback=PDMap.init";
+	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q&libraries=geometry,places&callback=PDMap.init";
+	  apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q&libraries=geometry,places&callback=PDMap.init";
 	  Utils.loadScript(apiURL, callback);
     },
     init: function(){
@@ -61,7 +62,7 @@ var PDMap = {
 		  }
 		};
 
-    	console.debug(this.mapHTMLelement);
+    	//console.debug(this.mapHTMLelement);
     	this.map = new google.maps.Map(this.mapHTMLelement, {
           center: this.userLocation,
           zoom: 8,
@@ -72,7 +73,7 @@ var PDMap = {
         //var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
         //this.map.set('styles', styles);
     	
-    	this.getUserGeoLocation();
+    	//this.getUserGeoLocation();
     	
         this.placeService = new google.maps.places.PlacesService(this.map);
     },

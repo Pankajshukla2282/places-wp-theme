@@ -12,3 +12,9 @@ Editor stylesheet
 body#tinymce {
   padding: 10px !important;
 }
+.width47 {
+	width:47%;
+}
+.width99 {
+	width:99%;
+}
