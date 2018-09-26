@@ -8,7 +8,7 @@
 //http://maps.googleapis.com/maps/api/geocode/json?address=naish+scout+reservation&components=administrative_area:KS|country:US&sensor=false
 //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=cruise&key=YOUR_API_KEY
 
-var PDMap = {
+var PDMap = PDMap || {
 	map: null,
 	mapHTMLelement: null,
 	placeService: null,
@@ -28,12 +28,18 @@ var PDMap = {
 	},
 	load: function (apiURL, callback) {
 	  this.mapHTMLelement = this.mapHTMLelement || document.getElementById("map");
+	  	  
+	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q";
 	  
 	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&signed_in=false&libraries=geometry,places&callback=PDMap.init";
 	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,places&callback=PDMap.init";
 	  //apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q&libraries=geometry,places&callback=PDMap.init";
 	  apiURL = apiURL||"https://maps.googleapis.com/maps/api/js?key=AIzaSyBqk3Ib6anN-jsMDHwyQKm4UYX3mRi_m-Q&libraries=geometry,places&callback=PDMap.init";
-	  Utils.loadScript(apiURL, callback);
+	  
+	  console.debug(this.map);
+	  if(!this.map){
+		  Utils.loadScript(apiURL, callback);
+	  }
     },
     init: function(){
     	var lat = 21.00, lng = 78.00, radius = 250;
@@ -249,6 +255,20 @@ var PDMap = {
 	        alert("Geocoder failed due to: " + status);
 	      }
 	    });
+	},
+	enableAddPlaceUsingMap: function(newPlaceFormhtml){
+		var that = this;
+		google.maps.event.addListener(that.map, 'click', function(event) {
+          marker = new google.maps.Marker({
+            position: event.latLng,
+            map: that.map
+          });
+          that.bindInfoWindow(marker, that.map, that.infoWindow, newPlaceFormhtml);
+        });
+	},
+	disableAddPlaceUsingMap: function(){
+		var that = this;
+		google.maps.event.clearListeners(that.map, 'click');
 	},
 	searchLocation: function(txtSearchElem, ulSearchSuggestionsElem){
 		var that = this;

@@ -24,3 +24,20 @@ add_filter( 'body_class', function($classes){
 	$classes[] = 'body_center';
 	return $classes;
 });
+
+function pd_theme_activation(){
+	global $wpdb;
+
+	$sql = "CREATE TABLE IF NOT EXISTS `pd_markers` ("
+	    ."`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,"
+	    ."`name` VARCHAR( 60 ) NOT NULL ,"
+	    ."`address` VARCHAR( 80 ) NOT NULL ,"
+	    ."`lat` FLOAT( 10, 6 ) NOT NULL ,"
+	    ."`lng` FLOAT( 10, 6 ) NOT NULL ,"
+	    ."`type` VARCHAR( 30 ) NOT NULL"
+	.") ENGINE = MYISAM;";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+}
+add_action("after_switch_theme", "pd_theme_activation");
