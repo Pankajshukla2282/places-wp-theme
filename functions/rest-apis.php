@@ -46,6 +46,27 @@ function pd_search_main() {
 			
 			update_option( "pd_topsearches", $term, TRUE );
 			break;
+
+		case "cachePlaceFromMap":
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'pd_markers';
+		
+			$wpdb->insert( $table_name, 
+					array( 
+						'place_id' => mysql_real_escape_string($_REQUEST['placeId']),
+						'name' => mysql_real_escape_string($_REQUEST['name']),
+						'address' => mysql_real_escape_string($_REQUEST['address']),
+						'lat' => mysql_real_escape_string($_REQUEST['lat']),
+						'lng' => mysql_real_escape_string($_REQUEST['lng']),
+						'type' => mysql_real_escape_string(implode(',', $_REQUEST['type']))
+					),
+					array( '%s', '%s', '%s', '%f', '%f', '%s' ) 
+				);
+			
+			//$wpdb->insert( $table, $data, $format ); $wpdb->insert( 'table', array( 'column1' => 'value1', 'column2' => 123 ), array( '%s', '%d' ) );
+			
+			break;
+
 		case "searchMarkers":
 		default:
 			$args = array(

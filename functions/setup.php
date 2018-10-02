@@ -27,9 +27,11 @@ add_filter( 'body_class', function($classes){
 
 function pd_theme_activation(){
 	global $wpdb;
+	$table_name = $wpdb->prefix . 'pd_markers';
 
-	$sql = "CREATE TABLE IF NOT EXISTS `pd_markers` ("
+	$sql = "CREATE TABLE IF NOT EXISTS `".$table_name."` ("
 	    ."`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,"
+	    ."`place_id` TEXT ,"
 	    ."`name` VARCHAR( 60 ) NOT NULL ,"
 	    ."`address` VARCHAR( 80 ) NOT NULL ,"
 	    ."`lat` FLOAT( 10, 6 ) NOT NULL ,"

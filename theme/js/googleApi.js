@@ -256,14 +256,15 @@ var PDMap = PDMap || {
 	      }
 	    });
 	},
-	enableAddPlaceUsingMap: function(newPlaceFormhtml){
+	enableAddPlaceUsingMap: function(formHTML){
 		var that = this;
 		google.maps.event.addListener(that.map, 'click', function(event) {
           marker = new google.maps.Marker({
             position: event.latLng,
             map: that.map
           });
-          that.bindInfoWindow(marker, that.map, that.infoWindow, newPlaceFormhtml);
+		  that.map.setCenter(event.latLng);
+          that.bindInfoWindow(marker, that.map, that.infoWindow, formHTML);
         });
 	},
 	disableAddPlaceUsingMap: function(){
