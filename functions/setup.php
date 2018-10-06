@@ -28,15 +28,19 @@ add_filter( 'body_class', function($classes){
 function pd_theme_activation(){
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'pd_markers';
-
+	
 	$sql = "CREATE TABLE IF NOT EXISTS `".$table_name."` ("
 	    ."`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,"
-	    ."`place_id` TEXT ,"
 	    ."`name` VARCHAR( 60 ) NOT NULL ,"
+	    ."`g_place_id` TEXT NULL ,"
+	    ."`type` VARCHAR( 30 ) NOT NULL, "
 	    ."`address` VARCHAR( 80 ) NOT NULL ,"
 	    ."`lat` FLOAT( 10, 6 ) NOT NULL ,"
 	    ."`lng` FLOAT( 10, 6 ) NOT NULL ,"
-	    ."`type` VARCHAR( 30 ) NOT NULL"
+	    ."`status` TINYINT(1) NOT NULL DEFAULT '1',"
+	    ."`created_by` INT NOT NULL ,"
+	    ."`created_on` TIMESTAMP NULL , "
+	    ."`updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"
 	.") ENGINE = MYISAM;";
 
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
